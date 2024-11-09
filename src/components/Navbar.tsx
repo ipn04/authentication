@@ -3,6 +3,7 @@ import axios from "axios";
 import avatar from "../assets/avatar.jpg";
 import { useNavigate } from "react-router-dom";
 import { Button } from "flowbite-react";
+import { initFlowbite } from "flowbite";
 
 interface User {
   username: string;
@@ -28,6 +29,7 @@ const Navbar = () => {
         })
         .then((response) => {
           setUser(response.data);
+          initFlowbite();
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
