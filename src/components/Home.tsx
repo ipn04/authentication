@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import gift from "../assets/gift.gif";
+// import React, { useState } from "react";
+// import gift from "../assets/gift.gif";
+import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import character from "../assets/character.gif"
+import Dashboard from "../pages/Dashboard";
+import {useLocation} from "react-router-dom"
+// import character from "../assets/character.gif"
 
 const Home = () => {
-  const [showMessage, setShowMessage] = useState(false);
+  // const [showMessage, setShowMessage] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const location = useLocation();
+
+  const showDashboard = location.pathname === "/Home";
 
   useEffect(() => {
     if (!token) {
@@ -16,15 +22,17 @@ const Home = () => {
     }
   }, [token, navigate]);
 
-  const handleGiftClick = () => {
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 2000);
-  };
+  // const handleGiftClick = () => {
+  //   setShowMessage(true);
+  //   setTimeout(() => setShowMessage(false), 2000);
+  // };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <div className="flex-grow grid place-items-center bg-gray-100 relative">
+      <Sidebar/>
+      {showDashboard && <Dashboard />} 
+      {/* <div className="flex-grow grid place-items-center bg-gray-100 relative">
         <div
           onClick={handleGiftClick}
           className="bg-red-500 rounded-lg shadow-lg cursor-pointer flex items-center justify-center hover:scale-110 transition-transform animate-bounce-slow"
@@ -76,7 +84,7 @@ const Home = () => {
             </div>
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
